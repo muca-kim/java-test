@@ -21,17 +21,17 @@ spring:
     # data: classpath:db/data.sql
 
   jpa:
-    database: mysql
-    hibernate.ddl-auto:
+    database: h2
+    hibernate.ddl-auto: create-drop
     generate-ddl: false
     show-sql: true
     properties:
       hibernate:
         format_sql: true
 
-  thymeleaf:
-    check-template-location: true
-    cache: false
+  # thymeleaf:
+  #   check-template-location: true
+  #   cache: false
 
   # 프로젝트 시작시 sql 초기화 설정
   sql:
