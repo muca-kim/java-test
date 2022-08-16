@@ -3,3 +3,47 @@ server:
   port: 9000
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
+
+  h2:
+    console:
+      enabled: true
+      path: /h2db
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    # url: jdbc:h2:~/db;AUTO_SERVER=TRUE
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    # schema: classpath:db/schema.sql
+    # data: classpath:db/data.sql
+
+  jpa:
+    database: mysql
+    hibernate.ddl-auto:
+    generate-ddl: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  thymeleaf:
+    check-template-location: true
+    cache: false
+
+  # 프로젝트 시작시 sql 초기화 설정
+  sql:
+    init:
+      mode: always
+
+  # static file 기본 패스 설정 => resources
+  web:
+    resources:
+      static-locations: classpath:/
+# logging:
+#   level:
+#     com:
+#       muca:
+#         web: debug
