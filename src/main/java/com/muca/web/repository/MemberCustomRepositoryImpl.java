@@ -1,6 +1,7 @@
 package com.muca.web.repository;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.muca.web.entity.MemberEntity;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -21,6 +22,9 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
     }
 
     private BooleanExpression eqName(String name) {
+        if (!StringUtils.hasText(name)) {
+            return null;
+        }
         return memberEntity.name.eq(name);
     }
 

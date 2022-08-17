@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.muca.web.constants.Grade;
+import com.muca.web.constants.Sex;
 
 import lombok.Getter;
 
@@ -16,6 +17,6 @@ public class MemberEntity {
     @Id
     private String name;
     private int age;
-    private String sex;
+    private Sex sex;
     private Grade grade;
 }
