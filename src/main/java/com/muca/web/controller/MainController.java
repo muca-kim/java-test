@@ -14,4 +14,11 @@ public class MainController {
         log.debug("main page");
         return "index";
     }
+
+    // @GetMapping("/polling")
+    // @RequestBody
+    // public String polling() {
+    // DeferredResult result = new DeferredResult<>();
+    // return "";
+    // }
 }
