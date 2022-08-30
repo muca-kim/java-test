@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.muca.web.entity.MessageEntity;
 
-public interface MessageRepository extends JpaRepository<MessageEntity, String> {
+public interface MessageRepository extends JpaRepository<MessageEntity, String>, MessageCustomRepository {
 
 }
