@@ -1,7 +1,10 @@
 package com.muca.web.controller;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import javax.swing.text.DateFormatter;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -21,7 +24,9 @@ import com.muca.web.entity.MessageEntity;
 import com.muca.web.service.MessageService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/message")
 @RequiredArgsConstructor
@@ -30,12 +35,15 @@ public class MessageController {
     private final ObjectMapper mapper;
     private final MessageService messageService;
 
+    // iso = ISO.DATE_TIME
     @GetMapping
     public DeferredResult<ResponseEntity<?>> getMessage(
-            @RequestParam @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime lastDateTime) {
+            @RequestParam String lastDateTime) {
+        LocalDateTime dateTime = LocalDateTime.parse(lastDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
-        List<MessageEntity> messages = messageService.getMessageByLastDateTime(lastDateTime);
+        List<MessageEntity> messages = messageService.getMessageByLastDateTime(dateTime);
         if (messages.size() > 0) {
+            log.debug("new message detected");
             result.setResult(ResponseEntity.ok().body(messages));
         }
 
@@ -43,9 +51,8 @@ public class MessageController {
     }
 
     @PostMapping
-    public ResponseEntity<?> saveMessage(@RequestBody String json)
-            throws JsonMappingException, JsonProcessingException {
-        MessageEntity message = mapper.readValue(json, MessageEntity.class);
+    public ResponseEntity<?> saveMessage(@RequestBody MessageEntity message) {
+        // MessageEntity message = mapper.readValue(json, MessageEntity.class);
         return ResponseEntity.ok().body(messageService.save(message));
     }
 }

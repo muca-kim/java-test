@@ -6,13 +6,17 @@ import javax.persistence.Table;
 
 import com.muca.web.dto.MessageDto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "message")
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MessageEntity extends BaseTimeEntity {
 
     @Id
