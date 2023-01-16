@@ -11,6 +11,7 @@ import static com.muca.web.entity.QMemberEntity.memberEntity;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Repository
 public class MemberCustomRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
